@@ -25,9 +25,8 @@ export default function SimpleBottomNavigation() {
   React.useEffect(() => {
     if(value === 0 ) navigate('/')
     else if(value === 1) navigate('/movies')
-    else if(value === 2) navigate('/series')
-    else if(value === 3) navigate('/search')
-    else if(value === 4) navigate('/favorites')
+    else if(value === 2) navigate('/search')
+    else if(value === 3) navigate('/favorites')
   } , [value , navigate])
   
 
@@ -43,7 +42,6 @@ export default function SimpleBottomNavigation() {
       >
         <BottomNavigationAction style={{color: '#fff'}} label="Trending" icon={<Whatshot />} />
         <BottomNavigationAction style={{color: '#fff'}}  label="Movies" icon={<Movie />} />
-        <BottomNavigationAction style={{color: '#fff'}}  label="TvSeries" icon={<LiveTv />} />
         <BottomNavigationAction style={{color: '#fff'}}  label="Search" icon={<Search />} />
         <BottomNavigationAction style={{color: '#fff'}}  label="Favorites" icon={<FavoriteBorder />} />
       </BottomNavigation>

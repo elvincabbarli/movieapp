@@ -5,7 +5,6 @@ import Header from "./components/header/Header";
 import SimpleBottomNavigation from "./components/MainNav";
 import Trending from "./Pages/Trending/Trending";
 import Movies from "./Pages/Movies/Movies";
-import Series from "./Pages/Series/Series";
 import Search from "./Pages/Search/Search";
 import Favorites from "./Pages/Favorites/Favorites";
 
@@ -18,7 +17,6 @@ function App() {
           <Routes>
             <Route path="/" element={<Trending />} exact />
             <Route path="/movies" element={<Movies /> } />
-            <Route path="/series" element={<Series />} />
             <Route path="/search" element={<Search />} />
             <Route path="/favorites" element={<Favorites />} />
           </Routes>

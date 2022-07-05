@@ -17,3 +17,26 @@
       padding-top: 80px;
   }
 }
+
+
+.pageTitle{
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  font-size: 2vw;
+  margin-bottom: 10px;
+  color: #fff;
+  font-family: 'Poppins' , sans-serif;
+}
+
+hr{
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 1000px) {
+  .pageTitle{
+    font-size: 6.4vw;
+    
+  }
+  
+}

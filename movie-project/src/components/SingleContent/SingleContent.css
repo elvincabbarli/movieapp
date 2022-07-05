@@ -1,0 +1,61 @@
+.media{
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    text-align: center;
+    padding: 5px;
+    border-radius: 10px;
+    font-family: 'Poppins' , sans-serif;
+    background-color: #282c34;
+    position: relative;
+    margin: 5px 0;
+}
+
+.media:hover {
+    background-color: #fff;
+    color: black;
+}
+
+.title{
+    margin: 5px;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.subTitle{
+    margin: 7px 0 0 0;
+}
+
+button.favorite-button{
+    background-color: red;
+    outline: none;
+    color: #fff;
+    border: 1px inset #fff;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+@media screen and (max-width: 550px) {
+
+    .media{
+        width: 100%;
+    }
+
+    .poster{
+        border-radius: 10px;
+    }
+
+    .title{
+        width: 100%;
+        text-align: center;
+        font-size: 17px;
+        padding: 8px 0;
+    }
+
+    .subTitle{
+        display: flex;
+        justify-content: space-between;
+        padding: 0 2px 3px 2px;
+    }
+    
+}
