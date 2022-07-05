@@ -1,0 +1,23 @@
+.header{
+    position: fixed;
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    font-family: 'Poppins' , sans-serif;
+    background-color: black;
+    box-shadow: 0 1px 5px red;
+    font-size: 3vw;
+    padding-bottom: 15px;
+    color: red;
+    z-index: 100;
+}
+
+@media screen and (max-width: 1000px) {
+    .header{
+        font-size: 6vw;
+        padding-top: 15px;
+    }
+}
