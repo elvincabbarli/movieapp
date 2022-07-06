@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 .app{
@@ -36,7 +37,7 @@ hr{
 @media screen and (max-width: 1000px) {
   .pageTitle{
     font-size: 6.4vw;
-    
+
   }
   
 }
