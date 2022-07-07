@@ -3,7 +3,7 @@ import './Header.css'
 
 const Header = () => {
   return (
-    <span onClick={() => window.scroll(0,0)} className='header'>🎥 Neftlix Clone 🎥</span>
+    <span onClick={() => window.scroll(0,0)} className='header'>🎥 Neftlix  🎥</span>
   )
 }
 

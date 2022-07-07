@@ -14,12 +14,12 @@ const SingleContent = ({
 }) => {
 
   return (
-    <div className="media">
+    <div className="media" key={id}>
         < Badge badgeContent={Math.round(vote_average)} color={vote_average > 6 ? 'primary' : 'secondary'} />
       <img className="poster" src={poster ? `${img_300}/${poster}` : unavailable} alt={title} />
       <b className="title">{title}</b>
       <span className="subTitle">
-        {media_type === 'tv' ? "TV-Series" : "Movie"}
+        {media_type}
         <br /> <br />
         <span className="subTitle">Release Date: {date }</span>
       </span>
