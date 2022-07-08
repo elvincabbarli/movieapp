@@ -12,50 +12,10 @@ const Movies = () => {
   // SORTING STATE
   const [sort, setSort] = useState("Select");
 
-  
-  const filteredMovie = () => {
-    if (sort === "Select") {
-      return content.map((item) => (
-        <SingleContent
-          key={item.id}
-          id={item.id}
-          poster={item.poster_path}
-          date={item.first_air_date || item.release_date}
-          media_type="movie"
-          vote_average={item.vote_average}
-          title={item.title || item.name}
-        />
-      ));
-    } else if (sort === "IMDB(asc)") {
-      return filteredData.map((item) => (
-        <SingleContent
-          key={item.id}
-          id={item.id}
-          poster={item.poster_path}
-          date={item.first_air_date || item.release_date}
-          media_type="movie"
-          vote_average={item.vote_average}
-          title={item.title || item.name}
-        />
-      ));
-    } else if (sort === "Year(asc)") {
-      return filteredData.map((item) => (
-        <SingleContent
-          key={item.id}
-          id={item.id}
-          poster={item.poster_path}
-          date={item.first_air_date || item.release_date}
-          media_type="movie"
-          vote_average={item.vote_average}
-          title={item.title || item.name}
-        />
-      ));
-    }
-  };
 
   const fetchMovies = async () => {
     const { data } = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_vide0=false&page=${page}`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&page=${page}&language=en-US&sort_by=${sort}&include_adult=false&include_vide0=false`
     );
 
     setContent(data.results);
@@ -69,19 +29,40 @@ const Movies = () => {
           return a.vote_average - b.vote_average;
         })
       );
-    } else if (e.target.value === "Year(asc)") {
+    } 
+    else if (e.target.value === "IMDB(des)") {
+      setfilteredData(
+        content.sort(function (a, b) {
+          return b.vote_average - a.vote_average;
+        })
+      );
+    }    
+    
+    else if (e.target.value === "Year(asc)") {
       setfilteredData(
         content.sort(function (a, b) {
           return (
-            parseInt(a.release_date.split("-")[0]) -
-            parseInt(b.release_date.split("-")[0])
+            parseInt(a.release_date.split("-")[0]) - parseInt(b.release_date.split("-")[0])
           );
         })
       );
     }
+
+    else if (e.target.value === "Year(des)") {
+      setfilteredData(
+        content.sort(function (a, b) {
+          return (
+            parseInt(b.release_date.split("-")[0]) - parseInt(a.release_date.split("-")[0])
+          );
+        })
+      );
+    }
+    else{
+      return content;
+    }
   };
 
-  console.log(filteredData);
+
 
   useEffect(() => {
     fetchMovies();
@@ -90,7 +71,7 @@ const Movies = () => {
   return (
     <>
       <span className="pageTitle">Movies</span>
-      {/* <FilterMovie setPage={setPage} page={page} handleSort={handleSort} /> */}
+      {/* FILTER FORM */}
       <div>
         <form style={{ marginBottom: "20px" }} action="">
           <label style={{ fontSize: "20px" }} htmlFor="">
@@ -118,7 +99,21 @@ const Movies = () => {
         </form>
       </div>
       <hr />
-      <div className="trending">{filteredMovie()}</div>
+      <div className="trending">
+        {
+          content && content.map((item) => (
+            <SingleContent
+              key={item.id}
+              id={item.id}
+              poster={item.poster_path}
+              date={item.first_air_date || item.release_date}
+              media_type="movie"
+              vote_average={item.vote_average}
+              title={item.title || item.name}
+            />
+          ))
+        }
+        </div>
       {numOfPages > 1 && (
         <CustomPagination setPage={setPage} numOfPAges={numOfPages} />
       )}
