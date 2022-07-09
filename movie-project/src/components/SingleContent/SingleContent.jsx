@@ -3,6 +3,7 @@ import {img_300 , unavailable} from '../../config/config'
 import {FavoriteBorder} from '@material-ui/icons';
 import './SingleContent.css'
 import { Badge } from "@material-ui/core";
+import ContentModal from "../ContentModal/ContentModal";
 
 const SingleContent = ({
   id,
@@ -14,7 +15,7 @@ const SingleContent = ({
 }) => {
 
   return (
-    <div className="media" key={id}>
+    <ContentModal media_type={media_type} id={id} >
         < Badge badgeContent={Math.round(vote_average)} color={vote_average > 6 ? 'primary' : 'secondary'} />
       <img className="poster" src={poster ? `${img_300}/${poster}` : unavailable} alt={title} />
       <b className="title">{title}</b>
@@ -25,7 +26,7 @@ const SingleContent = ({
       </span>
       <button className="favorite-button">< FavoriteBorder /></button>
       
-    </div>
+    </ContentModal>
   );
 };
 
