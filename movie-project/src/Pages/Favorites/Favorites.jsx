@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 
 const Favorites = () => {
-  return (
-    <span className='pageTitle'>Favorites</span>
-  )
-}
+  const [myfilm, setMyFilm] = useState([]);
 
-export default Favorites
+  
+    const favorites = JSON.parse(localStorage.getItem("favfilms"));
+    setMyFilm(favorites);
+  
+
+  return (
+    <span className="pageTitle">
+      Favorites
+      <div>`${myfilm}`</div>
+    </span>
+  );
+};
+
+export default Favorites;
