@@ -6,13 +6,13 @@
 * ## Firs off all Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/elvincabbarli/movieapp.git
 ```
 
 
 * ## Then Go to the project directory
 ```bash
-  cd my-project
+  cd movieapp
 ```
 
 * ## You can download the necessary packages with the command below
