@@ -16,7 +16,7 @@ function App() {
         <Container>
           <Routes>
             <Route path="/" element={<Trending />} exact />
-            <Route path="/movies" element={<Movies /> } />
+            <Route path="/movies" element={<Movies />} />
             <Route path="/search" element={<Search />} />
             <Route path="/favorites" element={<Favorites />} />
           </Routes>

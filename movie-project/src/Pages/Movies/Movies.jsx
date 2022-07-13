@@ -12,7 +12,6 @@ const Movies = () => {
   // SORTING STATE
   const [sort, setSort] = useState("Select");
 
-
   const fetchMovies = async () => {
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&page=${page}&language=en-US&sort_by=${sort}&include_adult=false&include_vide0=false`
@@ -29,16 +28,13 @@ const Movies = () => {
           return a.vote_average - b.vote_average;
         })
       );
-    } 
-    else if (e.target.value === "IMDB(des)") {
+    } else if (e.target.value === "IMDB(des)") {
       setfilteredData(
         content.sort(function (a, b) {
           return b.vote_average - a.vote_average;
         })
       );
-    }    
-    
-    else if (e.target.value === "Year(asc)") {
+    } else if (e.target.value === "Year(asc)") {
       setfilteredData(
         content.sort(function (a, b) {
           return (
@@ -46,9 +42,7 @@ const Movies = () => {
           );
         })
       );
-    }
-
-    else if (e.target.value === "Year(des)") {
+    } else if (e.target.value === "Year(des)") {
       setfilteredData(
         content.sort(function (a, b) {
           return (
@@ -56,13 +50,10 @@ const Movies = () => {
           );
         })
       );
-    }
-    else{
+    } else {
       return content;
     }
   };
-
-
 
   useEffect(() => {
     fetchMovies();
@@ -100,8 +91,8 @@ const Movies = () => {
       </div>
       <hr />
       <div className="trending">
-        {
-          content && content.map((item) => (
+        {content &&
+          content.map((item) => (
             <SingleContent
               key={item.id}
               id={item.id}
@@ -111,9 +102,8 @@ const Movies = () => {
               vote_average={item.vote_average}
               title={item.title || item.name}
             />
-          ))
-        }
-        </div>
+          ))}
+      </div>
       {numOfPages > 1 && (
         <CustomPagination setPage={setPage} numOfPAges={numOfPages} />
       )}

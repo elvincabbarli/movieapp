@@ -1,10 +1,12 @@
-import React from 'react'
-import './Header.css'
+import React from "react";
+import "./Header.css";
 
 const Header = () => {
   return (
-            <span onClick={() => window.scroll(0,0)} className='header'>🎥 Neftlix  🎥</span>
-  )
-}
+    <span onClick={() => window.scroll(0, 0)} className="header">
+      🎥 Neftlix 🎥
+    </span>
+  );
+};
 
-export default Header
+export default Header;

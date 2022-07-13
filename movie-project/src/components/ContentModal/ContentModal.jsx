@@ -4,15 +4,13 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import axios from "axios";
-import {
-  img_500,
-  unavailable,
-  unavailableLandscape,
-} from '../../config/config';
+import {img_500,unavailable,unavailableLandscape} from "../../config/config";
 import "./ContentModal.css";
 import { Button } from "@material-ui/core";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import Carousel from "./Carousel/Carousel";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -52,7 +50,6 @@ export default function ContentModal({ children, media_type, id }) {
     );
 
     setContent(data);
-    // console.log(data);
   };
 
   const fetchVideo = async () => {
@@ -62,6 +59,13 @@ export default function ContentModal({ children, media_type, id }) {
 
     setVideo(data.results[0]?.key);
   };
+
+
+  // LOCALSTORAGE FUNCTION
+  const sendLocal = () => {
+    localStorage.setItem('Films' , JSON.stringify(content))
+  }
+
 
   useEffect(() => {
     fetchData();
@@ -134,16 +138,32 @@ export default function ContentModal({ children, media_type, id }) {
                   <div>
                     <Carousel id={id} media_type={media_type} />
                   </div>
-
-                  <Button
-                    variant="contained"
-                    startIcon={<YouTubeIcon />}
-                    color="secondary"
-                    target="__blank"
-                    href={`https://www.youtube.com/watch?v=${video}`}
+                  <div
+                    style={{ display: "flex", justifyContent: "space-around", flexWrap: 'wrap' }}
+                    className="buttons"
                   >
-                    Watch the Trailer
-                  </Button>
+                    <Button
+                      style={{padding: '15px 25px' , margin: '10px 0'}}
+                      variant="contained"
+                      startIcon={<YouTubeIcon />}
+                      color="secondary"
+                      target="__blank"
+                      href={`https://www.youtube.com/watch?v=${video}`}
+                    >
+                      Watch the Trailer
+                    </Button>
+                    <Button
+                    onClick={sendLocal}
+                        style={{padding: '15px 55px' , margin: '10px 0'}}
+                      color="secondary"
+                      variant="contained"
+                    >
+                      <FontAwesomeIcon
+                        style={{ fontSize: "30px" }}
+                        icon={faHeart}
+                      />
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>

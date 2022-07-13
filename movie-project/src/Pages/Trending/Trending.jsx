@@ -2,11 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CustomPagination from "../../components/pagination/CustomPagination";
 import SingleContent from "../../components/SingleContent/SingleContent";
-import './Trending.css'
+import "./Trending.css";
 
 const Trending = () => {
   const [movieContent, setMovieContent] = useState([]);
-  const [page , setPage] = useState(1)
+  const [page, setPage] = useState(1);
 
   const fecthTrending = async () => {
     const { data } = await axios.get(
@@ -38,7 +38,7 @@ const Trending = () => {
             />
           ))}
       </div>
-      < CustomPagination setPage={setPage} />
+      <CustomPagination setPage={setPage} />
     </>
   );
 };
