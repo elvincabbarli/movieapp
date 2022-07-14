@@ -19,6 +19,24 @@ const Search = () => {
   const [content, setContent] = useState([]);
   const [numOfPages, setNumOfPages] = useState();
 
+  const [favorites, setFavorites] = useState([]);
+
+
+  
+  const setLocalStorage = (productId) => {
+    let product = content.find(product => product.id === productId)
+    let findInLocalStorage = favorites.find(product => product.id === productId);
+    if (findInLocalStorage) return;
+    let newFavouries = [...favorites, product]
+    setFavorites(newFavouries)
+    localStorage.setItem("favorites", JSON.stringify(newFavouries))
+}
+
+useEffect(() => {
+    let favoritesFromStorage = JSON.parse(localStorage.getItem("favorites") || JSON.stringify([]))
+    setFavorites([...favoritesFromStorage])
+}, [])
+
   const darkTheme = createMuiTheme({
     palette: {
       type: "dark",
@@ -92,6 +110,7 @@ const Search = () => {
               media_type={type ? "tv" : "movie"}
               vote_average={item.vote_average}
               title={item.title || item.name}
+              setLocalStorage={setLocalStorage}
             />
           ))}
         {searchText &&

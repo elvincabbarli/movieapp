@@ -1,34 +1,40 @@
 import React, { useEffect, useState } from "react";
 import SingleContent from "../../components/SingleContent/SingleContent";
+import './Favorites.css'
 
 const Favorites = () => {
   const [localFilms , setLocalFilms] = useState([])
 
-  const getFilms = () =>{
-    const myFilms = JSON.parse(localStorage.getItem('Films'))
-    setLocalFilms(myFilms)
-    console.log(localFilms)
-  }
-
   useEffect(() => {
-    getFilms()
+    const myFilms = JSON.parse(localStorage.getItem('favorites') || JSON.stringify([]))
+    setLocalFilms(myFilms)
+   
   } , [])
+
+  console.log(localFilms)
 
   return(
     <div className="container">
       <span className="pageTitle">Favorite Movies</span>
       <br />
-      <div>
-        {localFilms &&
-          <SingleContent
-          key={localFilms.id}
-          id={localFilms.id}
-          poster={localFilms.poster_path}
-          date={localFilms.first_air_date || localFilms.release_date}
-          media_type={localFilms.tagline}
-          vote_average={localFilms.vote_average}
-          title={localFilms.title || localFilms.name}
+      <div className="favorites-container">
+        {
+          localFilms.map((item) => (
+            <SingleContent
+              key={item.id}
+              id={item.id}
+              poster={item.poster_path}
+              date={item.first_air_date || item.release_date}
+              media_type={item.tagline}
+              vote_average={item.vote_average}
+              title={item.title || item.name}
           />
+          ))
+          
+     
+        
+
+          
         
         
         }

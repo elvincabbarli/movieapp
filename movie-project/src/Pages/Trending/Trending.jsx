@@ -8,6 +8,23 @@ const Trending = () => {
   const [movieContent, setMovieContent] = useState([]);
   const [page, setPage] = useState(1);
 
+  const [favorites, setFavorites] = useState([]);
+
+
+  const setLocalStorage = (productId) => {
+    let product = movieContent.find(product => product.id === productId)
+    let findInLocalStorage = favorites.find(product => product.id === productId);
+    if (findInLocalStorage) return;
+    let newFavouries = [...favorites, product]
+    setFavorites(newFavouries)
+    localStorage.setItem("favorites", JSON.stringify(newFavouries))
+}
+
+useEffect(() => {
+    let favoritesFromStorage = JSON.parse(localStorage.getItem("favorites") || JSON.stringify([]))
+    setFavorites([...favoritesFromStorage])
+}, [])
+
   const fecthTrending = async () => {
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.REACT_APP_API_KEY}&page=${page}`
@@ -35,6 +52,7 @@ const Trending = () => {
               media_type={item.media_type}
               vote_average={item.vote_average}
               title={item.title || item.name}
+              setLocalStorage={setLocalStorage}
             />
           ))}
       </div>

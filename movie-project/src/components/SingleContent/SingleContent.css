@@ -33,14 +33,30 @@
 
 .fav-button{
   cursor: pointer;
-  background-color: red;
-  padding: 10px;
+  background-color: green;
+  padding: 15px;
   border-radius: 20px;
   position: absolute;
   right: 15px;
-  top: 15px;
+  bottom: 135px;
   text-align: center;
+  border: none;
+  color: #fff;
 }
+
+.remove-fav{
+    position: absolute;
+    bottom: 135px;
+    left: 15px;
+    padding: 15px;
+    background-color: red;
+    border-radius: 20px;
+    border: none;
+    color: #fff;
+  cursor: pointer;
+
+}
+
 
 div.badge{
     padding: 10px;
@@ -57,12 +73,9 @@ div.badge{
 
 .poster{
   width: 250px;
-border-radius: 10px;
+  border-radius: 10px;
 }
 
-.poster:hover{
- 
-}
 
 
 .singlecontent-container{
