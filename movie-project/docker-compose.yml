@@ -1,0 +1,9 @@
+
+# Bu aşamadan sonra docker-compose.yml dosyamızı ilerde oluşabilecek enviroment vb. işler için oluşturmak istedim.Ayrıca burda port olarak 3000 portunu belirledim.Çünkü live-server kendisi 8080 üzerinden uygulamayı çalıştırıyor.Bende bunu kendi bilgisayarımda görmek için dışarıya 3000 portu olarak aktardım.
+version: '3.8'
+
+services:
+  test-app:
+    build: .
+    ports:
+      - 3000:8080
