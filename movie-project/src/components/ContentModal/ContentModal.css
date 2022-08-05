@@ -13,6 +13,14 @@
   background-color: #000000;
 }
 
+.carouselItem__img{
+  height: 160px;
+}
+
+.carouselItem__txt{
+  font-size: 14px;
+}
+
 .tagline {
   padding-bottom: 10px;
   align-self: center;

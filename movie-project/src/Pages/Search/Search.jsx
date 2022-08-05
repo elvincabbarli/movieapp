@@ -18,7 +18,7 @@ const Search = () => {
   const [searchText, setSearchText] = useState("");
   const [content, setContent] = useState([]);
   const [numOfPages, setNumOfPages] = useState();
-
+  const [notFound , setNotFound] = useState(false)
   const [favorites, setFavorites] = useState([]);
 
 
@@ -37,6 +37,14 @@ useEffect(() => {
     setFavorites([...favoritesFromStorage])
 }, [])
 
+const removeLocalrstorage = (id) => {
+  const itemsFav = JSON.parse(localStorage.getItem('favorites'))
+  const filteredItems = itemsFav.filter(item => item.id !== id)
+  console.log(filteredItems)
+  setFavorites(filteredItems)
+  localStorage.setItem('favorites' , JSON.stringify(filteredItems))
+}
+
   const darkTheme = createMuiTheme({
     palette: {
       type: "dark",
@@ -53,18 +61,18 @@ useEffect(() => {
       }&language=en-US&query=${searchText}&page=${page}&include_adult=false`
     );
 
-    setContent(data.results);
-    console.log(content);
+    setContent(data.results.slice(0,8));
     setNumOfPages(data.total_pages);
   };
 
   useEffect(() => {
     window.scroll(0, 0);
+    content.length ? setNotFound(false) : setNotFound(true);
 
     fetchSearch();
   }, [type, page]);
 
-  console.log(searchText);
+
 
   return (
     <div>
@@ -76,12 +84,14 @@ useEffect(() => {
             label="Search"
             variant="filled"
             onChange={(e) => setSearchText(e.target.value)}
+            onKeyPress={event => {
+              if (event.key === 'Enter') {
+                fetchSearch()
+              }
+            }}
           />
-          <Button
-            onClick={fetchSearch}
-            variant="contained"
-            style={{ marginLeft: "10px" }}
-          >
+
+          <Button onClick={fetchSearch} variant="contained" style={{ marginLeft: "10px" }}>
             <SearchIcon />
           </Button>
         </div>
@@ -111,14 +121,16 @@ useEffect(() => {
               vote_average={item.vote_average}
               title={item.title || item.name}
               setLocalStorage={setLocalStorage}
+              removeLocalrstorage={removeLocalrstorage}
             />
           ))}
-        {searchText &&
+        {/* {searchText &&
           !content &&
-          (type ? <h2>No series Found</h2> : <h2>No Movies Found</h2>)}
+          (type ? <h2>No series Found</h2> : <h2>No Movies Found</h2>)} */}
+           {notFound ? (<h2 style={{color: '#fff'}}>No result Found</h2>) : null}
       </div>
       {numOfPages > 1 && (
-        <CustomPagination setPage={setPage} numOfPAges={numOfPages} />
+        <CustomPagination setPage={setPage} />
       )}
     </div>
   );

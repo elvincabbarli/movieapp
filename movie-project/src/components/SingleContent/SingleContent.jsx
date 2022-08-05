@@ -1,20 +1,14 @@
-import React, { useState } from "react";
+import React , {useContext} from "react";
 import { img_300, unavailable } from "../../config/config";
 import "./SingleContent.css";
-import { Badge } from "@material-ui/core";
 import ContentModal from "../ContentModal/ContentModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faHeartCircleMinus } from "@fortawesome/free-solid-svg-icons";
+import { faHeart , faHeartCircleXmark} from "@fortawesome/free-solid-svg-icons";
+import AuthContext from "../../store/auth-context";
 
-const SingleContent = ({
-  id,
-  poster,
-  title,
-  date,
-  media_type,
-  vote_average,
-  setLocalStorage,
-}) => {
+const SingleContent = ({id,poster,title,date,media_type,vote_average,setLocalStorage,removeLocalrstorage}) => {
+  const authCtx = useContext(AuthContext)
+  const isLoggedIn = authCtx.isLoggedIn
   return (
     <div
       style={{
@@ -26,9 +20,15 @@ const SingleContent = ({
       className="singlecontent-container"
     >
       <div className="badge">⭐{Math.round(vote_average)}</div>
-      <button className="fav-button" onClick={() => setLocalStorage(id)}>
+      {isLoggedIn &&       <button className="fav-button" onClick={() => setLocalStorage(id)}>
         <FontAwesomeIcon icon={faHeart} />
-      </button>
+      </button> }
+
+      {isLoggedIn &&        <button className="remove-fav" onClick={() => removeLocalrstorage(id)}>
+        <FontAwesomeIcon icon={faHeartCircleXmark} />
+      </button>}
+
+
 
       <img
         className="poster"

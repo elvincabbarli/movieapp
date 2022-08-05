@@ -6,12 +6,19 @@
 }
 
 .app {
-  background: black;
+  background-image: url(../public/bg.jpg);
   min-height: 100vh;
+  background-position: center; 
+   background-size: cover;
+  background-repeat: no-repeat;
   color: #fff;
-  padding-top: 130px;
+  padding-top: 110px;
   padding-bottom: 70px;
+  opacity: .9;
+  z-index: -5;
 }
+
+
 
 @media screen and (max-width: 700px) {
   .app {

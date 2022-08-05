@@ -1,0 +1,116 @@
+form.register-form{
+    width: 500px;
+    height: 400px;
+    border-left: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid #fff;
+    border-radius: 15px 30px;
+}
+
+.email , .password{
+    display: flex;
+    flex-direction: column;
+}
+
+label{
+    font-size: 20px;
+    font-weight: 500;
+    font-family: 'Poppins' , sans-serif;
+}
+
+input{
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    margin: 10px 0;
+    width: 400px;
+}
+
+.registr{
+    padding: 10px 50px;
+    margin-top: 30px;
+    border: none;
+    background-color: #6BE8AF;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+.pop-up {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: antiquewhite;
+    width: 320px;
+    height: 150px;
+    padding: 10px;
+    border-radius: 15px;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50% , -35%);
+    box-shadow: 5px 5px 5px #000;
+    z-index: 500;
+
+}
+.pop-up-overlay{
+    width: 100%;
+    height: 1370px;
+    display: none;
+    background-color: rgba(0,0,0, .8);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 400;
+}
+
+.pop-up h2{
+    color: black;
+    font-family: 'Poppins' , sans-serif;
+    font-size: 18px;
+}
+
+#close-button 
+{
+    margin-top: 20px;
+    background-color: green;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 4px 15px;
+    border: none;
+    outline: none;
+    border-radius: 10px 5px;
+    cursor: pointer;
+}
+
+.signup-container{
+    height: 650px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    /* border: 1px solid #fff; */
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10.3px);
+    -webkit-backdrop-filter: blur(10.3px);
+}
+
+.sign-img{
+    background-image: url(./signin.png);
+    width: 500px;
+    height: 500px;
+    border-radius: 40px 20px;
+    background-position: center;
+}

@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import CustomPagination from "../../components/pagination/CustomPagination";
 import SingleContent from "../../components/SingleContent/SingleContent";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleCheck} from "@fortawesome/free-solid-svg-icons";
 
 const Movies = () => {
     const [page, setPage] = useState(1);
@@ -13,14 +15,60 @@ const Movies = () => {
     const [sort, setSort] = useState("Select");
     const [favorites, setFavorites] = useState([]);
 
-    const setLocalStorage = (productId) => {
-        let product = content.find(product => product.id === productId)
-        let findInLocalStorage = favorites.find(product => product.id === productId);
-        if (findInLocalStorage) return;
-        let newFavouries = [...favorites, product]
-        setFavorites(newFavouries)
-        localStorage.setItem("favorites", JSON.stringify(newFavouries))
-    }
+    
+      // Sending movie object to LocalStorage
+        const setLocalStorage = (productId) => {
+            let product = content.find((product) => product.id === productId);
+            let findInLocalStorage = favorites.find(
+            (product) => product.id === productId
+            );
+            if (findInLocalStorage){
+                findin()
+                window.scroll(0, 0)
+            return
+            };
+            let newFavouries = [...favorites, product];
+            setFavorites(newFavouries);
+            localStorage.setItem("favorites", JSON.stringify(newFavouries));
+            window.scroll(0, 0)
+            addedFav()
+        };
+
+
+        const removeLocalrstorage = (id) => {
+            const itemsFav = JSON.parse(localStorage.getItem('favorites'))
+            const filteredItems = itemsFav.filter(item => item.id !== id)
+            console.log(filteredItems)
+            setFavorites(filteredItems)
+            localStorage.setItem('favorites' , JSON.stringify(filteredItems))
+          }
+
+
+
+        // POPUP FUNCTIONS
+        const addedFav = () => {
+            const popup2 = document.getElementById('pop-up-div2')
+            const popupOverlay2 = document.getElementById('pop-up-overlay2')
+            const closeButton2 = document.getElementById('close-button2')
+            closeButton2.addEventListener('click' , () => {
+            popup2.style.display = 'none'
+            popupOverlay2.style.display = 'none'
+            })
+            popup2.style.display = 'flex'
+            popupOverlay2.style.display = 'block'
+        }
+
+        const findin = () => {
+            const popup = document.getElementById('pop-up-div')
+            const popupOverlay = document.getElementById('pop-up-overlay')
+            const closeButton = document.getElementById('close-button')
+            closeButton.addEventListener('click' , () => {
+            popup.style.display = 'none'
+            popupOverlay.style.display = 'none'
+            })
+            popup.style.display = 'flex'
+            popupOverlay.style.display = 'block'
+        }
 
     useEffect(() => {
         let favoritesFromStorage = JSON.parse(localStorage.getItem("favorites") || JSON.stringify([]))
@@ -34,7 +82,7 @@ const Movies = () => {
             `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&page=${page}&language=en-US&sort_by=${sort}&include_adult=false&include_vide0=false`
         );
 
-        setContent(data.results);
+        setContent(data.results.slice(0,8));
         setnumOfPages(data.total_pages);
     };
     const handleSort = (e) => {
@@ -80,6 +128,19 @@ const Movies = () => {
     return (
         <>
             <span className="pageTitle">Movies</span>
+            <hr />
+            <div id="pop-up-overlay" className="pop-up-overlay">
+                <div id="pop-up-div" className="pop-up">
+                    <h2>Film already in Favorites</h2>
+                    <button id="close-button" > <FontAwesomeIcon icon={faCircleCheck} /></button>
+                </div>
+            </div>
+            <div id="pop-up-overlay2" className="pop-up-overlay2">
+                <div id="pop-up-div2" className="pop-up2">
+                    <h2>Film added Favorites</h2>
+                    <button id="close-button2" > <FontAwesomeIcon icon={faCircleCheck} /></button>
+                </div>
+            </div>
             {/* FILTER FORM */}
             <div>
                 <form style={{marginBottom: "20px"}} action="">
@@ -109,6 +170,18 @@ const Movies = () => {
             </div>
             <hr/>
             <div className="trending">
+                      <div id="pop-up-overlay" className="pop-up-overlay">
+        <div id="pop-up-div" className="pop-up">
+            <h2>Film already in Favorites</h2>
+            <button id="close-button" > <FontAwesomeIcon icon={faCircleCheck} /></button>
+        </div>
+      </div>
+      <div id="pop-up-overlay2" className="pop-up-overlay2">
+        <div id="pop-up-div2" className="pop-up2">
+            <h2>Film added Favorites</h2>
+            <button id="close-button2" > <FontAwesomeIcon icon={faCircleCheck} /></button>
+        </div>
+      </div>
                 {content &&
                     content.map((item) => (
                         <SingleContent
@@ -120,11 +193,12 @@ const Movies = () => {
                             vote_average={item.vote_average}
                             title={item.title || item.name}
                             setLocalStorage={setLocalStorage}
+                            removeLocalrstorage={removeLocalrstorage}
                         />
                     ))}
             </div>
             {numOfPages > 1 && (
-                <CustomPagination setPage={setPage} numOfPAges={numOfPages}/>
+                <CustomPagination setPage={setPage}/>
             )}
         </>
     );
